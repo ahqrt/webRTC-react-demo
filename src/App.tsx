@@ -9,12 +9,12 @@ const CONSTRAINTS: MediaStreamConstraints = {
 function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [userMedia, setUserMedia] = useState<MediaStream | undefined>()
+  const [selectFilter, setSelectFilter] = useState('')
   const getUserDevicesInfo = async () => {
     const res = await getEnumerateDevices()
     console.log(res)
   }
   const handleUserMedia = (media: MediaStream) => {
-    console.log('media', media)
     setUserMedia(media)
     videoRef.current!.srcObject = media
   }
@@ -27,10 +27,29 @@ function App() {
   }, [])
   return (
     <div>
+      <video
+        className={selectFilter}
+        ref={videoRef}
+        autoPlay
+        playsInline
+        style={{ width: 300, height: 300 }}
+      />
       <button type="button" onClick={getUserDevicesInfo}>
         获取用户设备信息
       </button>
-      <video ref={videoRef} autoPlay playsInline></video>
+      <select
+        value={selectFilter}
+        onChange={value => {
+          // console.log('selectFilter', value)
+          setSelectFilter(value.target.value)
+        }}
+      >
+        <option label="none" value="none" />
+        <option label="blur" value="blur" />
+        <option label="grayscale" value="grayscale" />
+        <option label="invert" value="invert" />
+        <option label="sepia" value="sepia" />
+      </select>
     </div>
   )
 }

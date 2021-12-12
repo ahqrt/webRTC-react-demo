@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.none {
+  -webkit-filter: none;
+}
+
+.blur {
+  -webkit-filter: blur(3px);
+}
+
+.grayscale {
+  -webkit-filter: grayscale(1);
+}
+
+.invert {
+  -webkit-filter: invert(1);
+}
+
+.sepia {
+  -webkit-filter: sepia(1);
+}
